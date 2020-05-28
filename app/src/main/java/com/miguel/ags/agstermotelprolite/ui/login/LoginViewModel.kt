@@ -1,55 +1,65 @@
 package com.miguel.ags.agstermotelprolite.ui.login
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.content.Intent
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
-import android.util.Patterns
-import com.miguel.ags.agstermotelprolite.data.LoginRepository
-import com.miguel.ags.agstermotelprolite.data.Result
+import com.miguel.ags.agstermotelprolite.data.model.LoginResponse
+import com.miguel.ags.agstermotelprolite.network.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-import com.miguel.ags.agstermotelprolite.R
+class LoginViewModel : ViewModel() {
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+    fun iniciarSesion() {
+        val email = editTextEmail.text.toString().trim()
+        val password = editTextPassword.text.toString().trim()
 
-    private val _loginForm = MutableLiveData<LoginFormState>()
-    val loginFormState: LiveData<LoginFormState> = _loginForm
-
-    private val _loginResult = MutableLiveData<LoginResult>()
-    val loginResult: LiveData<LoginResult> = _loginResult
-
-    fun login(username: String, password: String) {
-        // can be launched in a separate asynchronous job
-        val result = loginRepository.login(username, password)
-
-        if (result is Result.Success) {
-            _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
-        } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
+        if (email.isEmpty()) {
+            editTextEmail.error = "Email required"
+            editTextEmail.requestFocus()
+            return@setOnClickListener
         }
-    }
 
-    fun loginDataChanged(username: String, password: String) {
-        if (!isUserNameValid(username)) {
-            _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)
-        } else if (!isPasswordValid(password)) {
-            _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
-        } else {
-            _loginForm.value = LoginFormState(isDataValid = true)
+
+        if (password.isEmpty()) {
+            editTextPassword.error = "Password required"
+            editTextPassword.requestFocus()
+            return@setOnClickListener
         }
-    }
 
-    // A placeholder username validation check
-    private fun isUserNameValid(username: String): Boolean {
-        return if (username.contains('@')) {
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
-        } else {
-            username.isNotBlank()
-        }
-    }
+        RetrofitClient.instance.userLogin(email, password)
+            .enqueue(object : Callback<LoginResponse> {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
+                }
 
-    // A placeholder password validation check
-    private fun isPasswordValid(password: String): Boolean {
-        return password.length > 5
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
+                ) {
+                    if (!response.body()?.error!!) {
+
+                        SharedPrefManager.getInstance(applicationContext)
+                            .saveUser(response.body()?.user!!)
+
+                        val intent = Intent(applicationContext, ProfileActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                        startActivity(intent)
+
+
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            response.body()?.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+                }
+            })
+
     }
 }
