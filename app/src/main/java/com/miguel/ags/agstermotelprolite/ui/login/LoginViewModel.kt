@@ -12,6 +12,7 @@ import retrofit2.Response
 class LoginViewModel : ViewModel() {
 
     fun iniciarSesion() {
+
         val email = editTextEmail.text.toString().trim()
         val password = editTextPassword.text.toString().trim()
 
