@@ -3,12 +3,10 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.miguel.ags.agstermotelprolite">
 
-    <dist:module dist:instant="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".utils.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
