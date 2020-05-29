@@ -1,19 +1,29 @@
 package com.miguel.ags.agstermotelprolite.ui.login
 
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
-import com.miguel.ags.agstermotelprolite.data.LoginRepository
+//import com.miguel.ags.agstermotelprolite.data.LoginRepository
 import com.miguel.ags.agstermotelprolite.data.Result
 
 import com.miguel.ags.agstermotelprolite.R
+import com.miguel.ags.agstermotelprolite.data.model.Usuarios
+import com.miguel.ags.agstermotelprolite.network.APIService
+import com.miguel.ags.agstermotelprolite.network.RetrofitClient
 import com.miguel.ags.agstermotelprolite.utils.Avisos
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.net.ConnectException
 
+//class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+
+class LoginViewModel  : ViewModel() {
     private val _loginForm = MutableLiveData<LoginFormState>()
-
+    private val mensajeEstado = MutableLiveData<Avisos<String>>()
 
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
@@ -22,14 +32,55 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     fun login(username: String, password: String) {
         // can be launched in a separate asynchronous job
-        val result = loginRepository.login(username, password)
 
-        if (result is Result.Success) {
-            _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
-        } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
-        }
+
+        val purApp = RetrofitClient.getRetrofitInstance().create(APIService::class.java)
+        val signInInfo = Usuarios(0, username, password)
+        purApp.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios> {
+
+            override fun onFailure(call: Call<Usuarios>, t: Throwable) {
+                if (t.cause is ConnectException) {
+                    mensajeEstado.value = Avisos("Check your connection!")
+                } else {
+                    mensajeEstado.value = Avisos("Something bad happened!")
+                }
+            }
+
+            override fun onResponse(
+                call: Call<Usuarios>,
+                response: Response<Usuarios>
+            ) {
+                if (response.code() == 200) {
+                    var editor : SharedPreferences.Editor? = null
+                    editor?.putString("id", "0")
+                    editor?.putString("name", response.body()?.name)
+                    editor?.putString("pass", response.body()?.pass)
+                    editor?.commit()
+
+                    mensajeEstado.value = Avisos( "Login success!")
+
+
+
+                } else if (response.code() == 500) {
+                    mensajeEstado.value = Avisos("The given email or password is wrong!")
+                } else {
+                    mensajeEstado.value = Avisos("Login failed!")
+                }
+            }
+        })
+
+
+
+
+
+        //val result = loginRepository.login(username, password)
+
+        //if (result is Result.Success) {
+         //   _loginResult.value =
+         //       LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+        //} else {
+        //    _loginResult.value = LoginResult(error = R.string.login_failed)
+      //  }
     }
 
     fun loginDataChanged(username: String, password: String) {

@@ -17,7 +17,7 @@ import android.widget.Toast
 
 import com.miguel.ags.agstermotelprolite.R
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity()  {
 
     private lateinit var loginViewModel: LoginViewModel
 
@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
 
-        loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
+        loginViewModel = ViewModelProviders.of(this)
             .get(LoginViewModel::class.java)
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
@@ -96,6 +96,8 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+
 
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)

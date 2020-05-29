@@ -1,8 +1,13 @@
 package com.miguel.ags.agstermotelprolite.data.model
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class Usuarios(
-    var idUser : Int,
-    var name : String,
-    var pass : String
+    @Json(name = "id" ) var idUser: Int,
+    @Json(name = "name") var name: String,
+    @Json(name = "pass") var pass: String
 
 )
+
