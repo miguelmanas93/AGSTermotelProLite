@@ -16,8 +16,8 @@ interface APIService {
     @FormUrlEncoded
     @POST("/usuarios")
     fun userLogin(
-        @Field("email") email:String,
-        @Field("password") password: String
+        @Field("name") name:String,
+        @Field("pass") pass: String
     ): Call<LoginResponse>
 }
 
