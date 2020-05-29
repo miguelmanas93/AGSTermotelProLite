@@ -6,26 +6,27 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-object RetrofitClient {
-    private val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor { chain ->
-            val original = chain.request()
+class RetrofitClient {
+    companion object {
 
-            val requestBuilder = original.newBuilder()
-                .method(original.method(), original.body())
+        val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+            this.level = HttpLoggingInterceptor.Level.BODY
+        }
 
-            val request = requestBuilder.build()
-            chain.proceed(request)
+        val client: OkHttpClient = OkHttpClient.Builder().apply {
+            this.addInterceptor(interceptor)
         }.build()
 
-    val instance: APIService by lazy{
-        val retrofit = Retrofit.Builder()
-            .baseUrl(Constantes.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .client(okHttpClient)
-            .build()
-
-        retrofit.create(APIService::class.java)
+        /**
+         * Companion object to create the Mercatus
+         */
+        fun getRetrofitInstance(): Retrofit {
+            return Retrofit.Builder()
+                .baseUrl(Constantes.BASE_URL)
+                .client(client)
+                .addConverterFactory(MoshiConverterFactory.create())
+                .build()
+        }
     }
 
 }

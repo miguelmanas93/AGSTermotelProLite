@@ -8,10 +8,13 @@ import com.miguel.ags.agstermotelprolite.data.LoginRepository
 import com.miguel.ags.agstermotelprolite.data.Result
 
 import com.miguel.ags.agstermotelprolite.R
+import com.miguel.ags.agstermotelprolite.utils.Avisos
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
+
+
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
     private val _loginResult = MutableLiveData<LoginResult>()

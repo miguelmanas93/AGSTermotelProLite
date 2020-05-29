@@ -1,20 +1,30 @@
 package com.miguel.ags.agstermotelprolite.network
 
-import com.miguel.ags.agstermotelprolite.data.model.LoginResponse
-import retrofit2.Call
+import com.miguel.ags.agstermotelprolite.data.model.Usuarios
 import retrofit2.http.*
 
+
 interface APIService {
+
+    // Peticion Iniciar Sesion
+    @Headers("Content-Type:application/json")
+    @POST("/usuarios")
+    fun iniciarSesion(
+        @Body info: Usuarios
+    ): retrofit2.Call<Usuarios>
 
     //usuarios?id=0&name=Miguel&pass=pass12Jukes
     @GET("/usuarios")
     fun getUsuario(@Query("id") id: String)
 
     @FormUrlEncoded
-    @POST("usuarios/{name}{pass}")
+    @POST("usuarios={id}=0&name={name}&pass={pass}")
     fun userLogin(
-        @Field("name") name: String,
-        @Field("pass") pass: String
-    ): Call<LoginResponse>
+        @Path("id") id: String,
+        @Path("name") name: String,
+        @Path("pass") pass: String
+    ): retrofit2.Call<Usuarios>
+
+
 }
 
