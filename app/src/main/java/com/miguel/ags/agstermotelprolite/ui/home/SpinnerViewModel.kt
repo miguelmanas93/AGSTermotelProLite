@@ -47,7 +47,7 @@ class SpinnerViewModel : ViewModel() {
     fun loadSpinnerData() {
         val purApp = RetrofitClient.getRetrofitInstance().create(APIService::class.java)
 
-        val releaseResponse = purApp.getCamaras(0).execute()
+        val releaseResponse = purApp.getCamaras().execute()
         val releases = releaseResponse.body()
 
         val result = ArrayList<Camaras>()
