@@ -1,25 +1,12 @@
 package com.miguel.ags.agstermotelprolite.ui.login
 
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.miguel.ags.agstermotelprolite.MainActivity
 import com.miguel.ags.agstermotelprolite.R
-import com.miguel.ags.agstermotelprolite.data.model.Usuarios
-import com.miguel.ags.agstermotelprolite.network.APIService
-import com.miguel.ags.agstermotelprolite.network.RetrofitClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.net.ConnectException
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 

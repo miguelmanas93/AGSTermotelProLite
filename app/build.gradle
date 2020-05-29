@@ -64,6 +64,7 @@ dependencies {
 
     // Koin for Kotlin apps
     implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
     // Testing
     testImplementation "org.koin:koin-test:$koin_version"
