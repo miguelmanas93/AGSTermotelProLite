@@ -1,6 +1,7 @@
 package com.miguel.ags.agstermotelprolite.network
 
 import com.miguel.ags.agstermotelprolite.data.model.Usuarios
+import retrofit2.Call
 import retrofit2.http.*
 
 
@@ -18,12 +19,15 @@ interface APIService {
     fun getUsuario(@Query("id") id: String)
 
     @FormUrlEncoded
-    @POST("usuarios={id}=0&name={name}&pass={pass}")
+    @POST("usuarios?id={id}&name={name}&pass={pass}")
     fun userLogin(
         @Path("id") id: String,
         @Path("name") name: String,
         @Path("pass") pass: String
     ): retrofit2.Call<Usuarios>
+
+    @GET("usuarios")
+    open fun getCamaras(): Call<List<Usuarios>>
 
 
 }

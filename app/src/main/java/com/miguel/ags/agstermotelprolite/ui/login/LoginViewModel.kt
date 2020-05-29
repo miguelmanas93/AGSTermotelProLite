@@ -1,6 +1,5 @@
 package com.miguel.ags.agstermotelprolite.ui.login
 
-//import com.miguel.ags.agstermotelprolite.data.LoginRepository
 
 import android.content.SharedPreferences
 import android.util.Patterns
@@ -19,7 +18,6 @@ import retrofit2.Response
 import java.net.ConnectException
 import com.miguel.ags.agstermotelprolite.data.Result
 
-//class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 
 class LoginViewModel (private val loginRepository: LoginRepository) : ViewModel() {
     private val _loginForm = MutableLiveData<LoginFormState>()
