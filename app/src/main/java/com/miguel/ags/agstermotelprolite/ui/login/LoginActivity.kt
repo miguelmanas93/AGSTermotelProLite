@@ -1,6 +1,7 @@
 package com.miguel.ags.agstermotelprolite.ui.login
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,7 +14,9 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.miguel.ags.agstermotelprolite.MainActivity
 import com.miguel.ags.agstermotelprolite.R
 
 class LoginActivity : AppCompatActivity() {
@@ -30,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
 
-        loginViewModel = ViewModelProviders.of(this)
+        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
@@ -100,7 +103,9 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
-        // TODO : initiate successful logged in experience
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        
         Toast.makeText(
             applicationContext,
             "$welcome $displayName",

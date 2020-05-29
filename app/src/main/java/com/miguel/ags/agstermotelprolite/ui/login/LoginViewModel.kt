@@ -1,29 +1,27 @@
 package com.miguel.ags.agstermotelprolite.ui.login
 
+//import com.miguel.ags.agstermotelprolite.data.LoginRepository
+
 import android.content.SharedPreferences
+import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import android.util.Patterns
-//import com.miguel.ags.agstermotelprolite.data.LoginRepository
-import com.miguel.ags.agstermotelprolite.data.Result
-
 import com.miguel.ags.agstermotelprolite.R
-import com.miguel.ags.agstermotelprolite.data.model.LoggedInUser
+import com.miguel.ags.agstermotelprolite.data.model.LoginRepository
 import com.miguel.ags.agstermotelprolite.data.model.Usuarios
 import com.miguel.ags.agstermotelprolite.network.APIService
 import com.miguel.ags.agstermotelprolite.network.RetrofitClient
 import com.miguel.ags.agstermotelprolite.utils.Avisos
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.net.ConnectException
-import java.util.*
+import com.miguel.ags.agstermotelprolite.data.Result
 
 //class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 
-class LoginViewModel  : ViewModel() {
+class LoginViewModel (private val loginRepository: LoginRepository) : ViewModel() {
     private val _loginForm = MutableLiveData<LoginFormState>()
     private val mensajeEstado = MutableLiveData<Avisos<String>>()
 
@@ -55,12 +53,11 @@ class LoginViewModel  : ViewModel() {
                     editor?.putString("name", response.body()?.name)
                     editor?.putString("pass", response.body()?.pass)
                     editor?.commit()
-                    Result.Success("Bienvenido $username")
                     mensajeEstado.value = Avisos( "Login success!")
 
                     val result = loginRepository.login(username, password)
 
-                    if (result is kotlin.Result.Success) {
+                    if (result is Result.Success) {
                         _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
                     } else {
                         _loginResult.value = LoginResult(error = R.string.login_failed)
