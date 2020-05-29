@@ -9,6 +9,7 @@ import android.util.Patterns
 import com.miguel.ags.agstermotelprolite.data.Result
 
 import com.miguel.ags.agstermotelprolite.R
+import com.miguel.ags.agstermotelprolite.data.model.LoggedInUser
 import com.miguel.ags.agstermotelprolite.data.model.Usuarios
 import com.miguel.ags.agstermotelprolite.network.APIService
 import com.miguel.ags.agstermotelprolite.network.RetrofitClient
@@ -18,6 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.net.ConnectException
+import java.util.*
 
 //class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 
@@ -31,13 +33,10 @@ class LoginViewModel  : ViewModel() {
     val loginResult: LiveData<LoginResult> = _loginResult
 
     fun login(username: String, password: String) {
-        // can be launched in a separate asynchronous job
-
-
         val purApp = RetrofitClient.getRetrofitInstance().create(APIService::class.java)
         val signInInfo = Usuarios(0, username, password)
-        purApp.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios> {
 
+        purApp.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios> {
             override fun onFailure(call: Call<Usuarios>, t: Throwable) {
                 if (t.cause is ConnectException) {
                     mensajeEstado.value = Avisos("Check your connection!")
@@ -50,15 +49,22 @@ class LoginViewModel  : ViewModel() {
                 call: Call<Usuarios>,
                 response: Response<Usuarios>
             ) {
-                if (response.code() == 200) {
+                if (response.code() == 200 || response.code() == 201) {
                     var editor : SharedPreferences.Editor? = null
                     editor?.putString("id", "0")
                     editor?.putString("name", response.body()?.name)
                     editor?.putString("pass", response.body()?.pass)
                     editor?.commit()
-
+                    Result.Success("Bienvenido $username")
                     mensajeEstado.value = Avisos( "Login success!")
 
+                    val result = loginRepository.login(username, password)
+
+                    if (result is kotlin.Result.Success) {
+                        _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+                    } else {
+                        _loginResult.value = LoginResult(error = R.string.login_failed)
+                    }
 
 
                 } else if (response.code() == 500) {
@@ -70,17 +76,6 @@ class LoginViewModel  : ViewModel() {
         })
 
 
-
-
-
-        //val result = loginRepository.login(username, password)
-
-        //if (result is Result.Success) {
-         //   _loginResult.value =
-         //       LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
-        //} else {
-        //    _loginResult.value = LoginResult(error = R.string.login_failed)
-      //  }
     }
 
     fun loginDataChanged(username: String, password: String) {

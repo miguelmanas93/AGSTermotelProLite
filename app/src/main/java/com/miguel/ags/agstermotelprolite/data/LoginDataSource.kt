@@ -47,8 +47,6 @@ class LoginDataSource {
 
                         mensajeEstado.value = Avisos( "Login success!")
 
-
-
                     } else if (response.code() == 500) {
                         mensajeEstado.value = Avisos("The given email or password is wrong!")
                     } else {
