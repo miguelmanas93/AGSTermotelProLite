@@ -1,0 +1,210 @@
+{
+  "usuarios": [
+    {
+      "id": 0,
+      "name": "Miguel",
+      "pass": "qwerty",
+      "camaras": [
+        {
+          "id": 0,
+          "nombre": "AGS Pita",
+          "sonda": [
+            {
+              "numSerie": "1233",
+              "alias": "Sonda 1",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "2233",
+              "alias": "Sonda 2",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "3333",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "4444",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "5555",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "6666",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "nombre": "AGS Pita 2",
+          "sonda": [
+            {
+              "numSerie": "7777",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "8888",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "9999",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "nombre": "AGS Pita 3",
+          "sonda": [
+            {
+              "numSerie": "3333",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "3333",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "3333",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "3333",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "MiguelPro",
+      "pass": "pass12Jeukes",
+      "camaras": [
+        {
+          "id": 1,
+          "nombre": "AGS Pita",
+          "sonda": [
+            {
+              "numSerie": "1233",
+              "alias": "Sonda 1",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "2233",
+              "alias": "Sonda 2",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "3333",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "3333",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "3333",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "3333",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "nombre": "AGS Pita",
+          "sonda": [
+            {
+              "numSerie": "3333",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "3333",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            },
+            {
+              "numSerie": "3333",
+              "alias": "Sonda 3",
+              "descripcion": "Está en la rampa",
+              "temperatura": "28.48"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "ttgrtttg",
+      "pass": "ffffff"
+    },
+    {
+      "id": 3,
+      "name": "ttgrtttg",
+      "pass": "ffffff"
+    },
+    {
+      "id": 4,
+      "name": "fwfwdw",
+      "pass": "3h4h4y"
+    },
+    {
+      "id": 5,
+      "name": "fwfwdw",
+      "pass": "3h4h4y"
+    },
+    {
+      "id": 6,
+      "name": "vegrvr",
+      "pass": "gbtbtb"
+    },
+    {
+      "id": 7,
+      "name": "vegrvr",
+      "pass": "gbtbtb"
+    }
+  ]
+}

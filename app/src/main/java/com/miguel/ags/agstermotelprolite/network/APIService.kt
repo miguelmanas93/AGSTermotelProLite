@@ -27,7 +27,7 @@ interface APIService {
     ): retrofit2.Call<Usuarios>
 
     @GET("usuarios")
-    open fun getCamarasById(@Query("id") id: Int): Call<Usuarios>
+    open fun getUsuarios(): Call<List<Usuarios>>
 
 }
 
