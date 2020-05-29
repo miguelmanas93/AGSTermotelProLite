@@ -1,6 +1,5 @@
 package com.miguel.ags.agstermotelprolite.network
 
-import com.miguel.ags.agstermotelprolite.data.model.Camaras
 import com.miguel.ags.agstermotelprolite.data.model.Usuarios
 import retrofit2.Call
 import retrofit2.http.*
@@ -28,8 +27,7 @@ interface APIService {
     ): retrofit2.Call<Usuarios>
 
     @GET("usuarios")
-    open fun getCamaras(): Call<List<Camaras>>
-
+    open fun getCamarasById(@Query("id") id: Int): Call<Usuarios>
 
 }
 
