@@ -30,8 +30,7 @@ class LoginViewModel (private val loginRepository: LoginRepository) : ViewModel(
 
     fun login(username: String, password: String) {
         val purApp = RetrofitClient.getRetrofitInstance().create(APIService::class.java)
-        val signInInfo = Usuarios(0, username, password)
-
+        val signInInfo = Usuarios(0, username, password, emptyList())
         purApp.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios> {
             override fun onFailure(call: Call<Usuarios>, t: Throwable) {
                 if (t.cause is ConnectException) {
@@ -47,7 +46,6 @@ class LoginViewModel (private val loginRepository: LoginRepository) : ViewModel(
             ) {
                 if (response.code() == 200 || response.code() == 201) {
                     var editor : SharedPreferences.Editor? = null
-                    editor?.putString("id", "0")
                     editor?.putString("name", response.body()?.name)
                     editor?.putString("pass", response.body()?.pass)
                     editor?.commit()

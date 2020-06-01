@@ -23,7 +23,7 @@ class LoginDataSource {
 
 
         val purApp = RetrofitClient.getRetrofitInstance().create(APIService::class.java)
-        val signInInfo = Usuarios(0, username, password)
+        val signInInfo = Usuarios(0, username, password, camaras = null)
         purApp.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios> {
 
             override fun onFailure(call: Call<Usuarios>, t: Throwable) {
@@ -43,7 +43,7 @@ class LoginDataSource {
                     editor?.putString("id", "0")
                     editor?.putString("name", response.body()?.name)
                     editor?.putString("pass", response.body()?.pass)
-                    editor?.commit()
+                   editor?.commit()
 
                     mensajeEstado.value = Avisos("Login success!")
 
@@ -58,6 +58,8 @@ class LoginDataSource {
         val userName = LoggedInUser("$username")
         return Result.Success(userName)
     }
+
+
 
     fun logout() {
         // TODO: revoke authentication

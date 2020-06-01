@@ -14,10 +14,6 @@ interface APIService {
         @Body info: Usuarios
     ): retrofit2.Call<Usuarios>
 
-    //usuarios?id=0&name=Miguel&pass=pass12Jukes
-    @GET("/usuarios")
-    fun getUsuario(@Query("id") id: String)
-
     @FormUrlEncoded
     @POST("usuarios?id={id}&name={name}&pass={pass}")
     fun userLogin(
@@ -28,6 +24,8 @@ interface APIService {
 
     @GET("usuarios")
     open fun getUsuarios(): Call<List<Usuarios>>
+
+
 
 }
 
