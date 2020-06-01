@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 data class Usuarios(
     @Json(name = "id" ) var idUser: Int,
     @Json(name = "name") var name: String,
-    @Json(name = "pass") var pass: String
-
+    @Json(name = "pass") var pass: String,
+    @Json(name = "Camaras") var camaras : List<Camaras>
 )
 
