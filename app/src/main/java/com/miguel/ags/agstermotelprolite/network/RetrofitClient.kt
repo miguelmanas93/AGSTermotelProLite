@@ -1,10 +1,12 @@
 package com.miguel.ags.agstermotelprolite.network
 
 import com.miguel.ags.agstermotelprolite.utils.Constantes
+import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+
 
 class RetrofitClient {
     companion object {
@@ -21,7 +23,7 @@ class RetrofitClient {
          * Companion object to create the Mercatus
          */
         fun getRetrofitInstance(): Retrofit {
-            return Retrofit.Builder()
+                return Retrofit.Builder()
                 .baseUrl(Constantes.BASE_URL)
                 .client(client)
                 .addConverterFactory(MoshiConverterFactory.create())

@@ -30,54 +30,90 @@
         app:layout_constraintTop_toBottomOf="@+id/text_home" />
 
     <TableLayout
-        android:layout_width="397dp"
+        android:layout_width="match_parent"
         android:layout_height="534dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCamaras">
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCamaras"
+        >
 
         <TableRow
+            android:padding="5dp"
+            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            >
 
             <TextView
+                android:padding="2dp"
+
                 android:id="@+id/cab_NumSerie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Numero de Serie" />
+                android:textColor="#FFFFFF"
+                android:text="Numero de Serie"
+                android:textSize="18dp"/>
 
             <TextView
                 android:id="@+id/cab_Alias"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alias" />
+                android:text="Alias"
+                android:textColor="#FFFFFF"
+                android:textSize="18dp"/>
 
             <TextView
                 android:id="@+id/cab_Descripcion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descripción" />
+                android:text="Descripción"
+                android:textColor="#FFFFFF"
+                android:textSize="18dp"/>
 
             <TextView
                 android:id="@+id/cab_Temperatura"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Temperatura" />
+                android:text="Temperatura"
+                android:textColor="#FFFFFF"
+                android:textSize="18dp"/>
         </TableRow>
 
         <TableRow
+            android:padding="5dp"
+            android:layout_marginTop="3dp"
+            android:background="#ececec"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/dat_NumSerie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:text="Numero de Serie" />
+
+        <TextView
+            android:id="@+id/dat_Alias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alias" />
+
+        <TextView
+            android:id="@+id/dat_Descripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción" />
+
+        <TextView
+            android:id="@+id/dat_Temperatura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temperatura" />
+        </TableRow>
+
     </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.miguel.ags.agstermotelprolite.R
@@ -21,35 +22,39 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
 
 
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel::class.java)
+            ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
         val textView: TextView = root.findViewById(R.id.text_home)
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
-
-        val values = arrayOf(
-            "Pita",
-            "Albacete",
-            "Almeria",
-            "Madrid"
-        )
+//Spiner con los datos
         val spinner = root.findViewById<View>(R.id.spinnerCamaras) as Spinner
+        spinnerViewModel = ViewModelProviders.of(this).get(SpinnerViewModel::class.java)
+        var datos = spinnerViewModel.cargarDatos()
+
         val adapter = ArrayAdapter(
             this.requireActivity(),
             android.R.layout.simple_spinner_item,
-            values
+            datos
         )
+
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
         spinner.adapter = adapter
 
         return root
+    }
+
+    operator fun <T> MutableLiveData<ArrayList<T>>.plusAssign(values: List<T>) {
+        val value = this.value ?: arrayListOf()
+        value.addAll(values)
+        this.value = value
     }
 }
 
