@@ -1,14 +1,11 @@
 package com.miguel.ags.agstermotelprolite.ui.home
 
-import android.view.View
-import android.widget.AdapterView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.miguel.ags.agstermotelprolite.data.model.Usuarios
 import com.miguel.ags.agstermotelprolite.network.APIService
 import com.miguel.ags.agstermotelprolite.network.RetrofitClient
 import com.miguel.ags.agstermotelprolite.utils.Avisos
-import io.reactivex.disposables.Disposable
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,10 +13,7 @@ import retrofit2.Response
 
 class SpinnerViewModel : ViewModel() {
 
-    private lateinit var subscription: Disposable
-
     private var mensajeEstado = MutableLiveData<Avisos<String>>()
-
 
     fun cargarDatos(): ArrayList<String> {
         var camaras: ArrayList<String> = arrayListOf(
@@ -35,8 +29,12 @@ class SpinnerViewModel : ViewModel() {
             override fun onResponse(
                 call: Call<List<Usuarios>>,
                 response: Response<List<Usuarios>>
+
+
             ) {
                 camaras = loadDataList(response.body())
+
+
                 //Falta escribir bien los datos
             }
 
@@ -46,11 +44,11 @@ class SpinnerViewModel : ViewModel() {
             }
         })
 
-
         return camaras
     }
 
     private fun loadDataList(body: List<Usuarios>?): ArrayList<String> {
+
         return body as ArrayList<String>
 
     }

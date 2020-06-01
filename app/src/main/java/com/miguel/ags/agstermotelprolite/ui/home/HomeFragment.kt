@@ -34,7 +34,8 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
-//Spiner con los datos
+
+        //Spiner con los datos
         val spinner = root.findViewById<View>(R.id.spinnerCamaras) as Spinner
         spinnerViewModel = ViewModelProviders.of(this).get(SpinnerViewModel::class.java)
         var datos = spinnerViewModel.cargarDatos()
@@ -48,14 +49,12 @@ class HomeFragment : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
         spinner.adapter = adapter
 
+        //Recicler View para mostrar datos de la tabla
+
+
         return root
     }
 
-    operator fun <T> MutableLiveData<ArrayList<T>>.plusAssign(values: List<T>) {
-        val value = this.value ?: arrayListOf()
-        value.addAll(values)
-        this.value = value
-    }
 }
 
 
