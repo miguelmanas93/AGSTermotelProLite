@@ -1,7 +1,6 @@
 package com.miguel.ags.agstermotelprolite.network
 
 import com.miguel.ags.agstermotelprolite.data.model.Usuarios
-import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -17,6 +16,9 @@ interface APIService {
 
     @GET("usuarios")
      fun getUsuarios(): Call<List<Usuarios>>
+
+    @GET("usuarios")
+    fun getCamaras(@Query("id") id : String, @Query("nombre") nombre : String, @Query("pass") pass : String): Call<List<Usuarios>>
 
 
 }
