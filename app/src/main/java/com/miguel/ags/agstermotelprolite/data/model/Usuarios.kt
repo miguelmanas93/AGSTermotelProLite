@@ -9,5 +9,7 @@ data class Usuarios(
     @Json(name = "name") var name: String,
     @Json(name = "pass") var pass: String,
     @Json(name = "Camaras") var camaras: List<Camaras>?
+
 )
+
 

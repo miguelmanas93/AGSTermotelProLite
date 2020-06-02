@@ -23,10 +23,11 @@ class RetrofitClient {
          * Companion object to create the Mercatus
          */
         fun getRetrofitInstance(): Retrofit {
+            val moshi = Moshi.Builder().build()
                 return Retrofit.Builder()
                 .baseUrl(Constantes.BASE_URL)
                 .client(client)
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build()
         }
     }

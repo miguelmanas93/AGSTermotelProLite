@@ -30,9 +30,9 @@ class LoginViewModel (private val loginRepository: LoginRepository) : ViewModel(
 
     fun login(username: String, password: String) {
         val purApp = RetrofitClient.getRetrofitInstance().create(APIService::class.java)
-        val signInInfo = Usuarios<Any>(0, username, password, emptyList())
-        purApp.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios<Any?>> {
-            override fun onFailure(call: Call<Usuarios<Any?>>, t: Throwable) {
+        val signInInfo = Usuarios(0, username, password, emptyList())
+        purApp.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios> {
+            override fun onFailure(call: Call<Usuarios>, t: Throwable) {
                 if (t.cause is ConnectException) {
                     mensajeEstado.value = Avisos("Check your connection!")
                 } else {
@@ -41,8 +41,8 @@ class LoginViewModel (private val loginRepository: LoginRepository) : ViewModel(
             }
 
             override fun onResponse(
-                call: Call<Usuarios<Any?>>,
-                response: Response<Usuarios<Any?>>
+                call: Call<Usuarios>,
+                response: Response<Usuarios>
             ) {
                 if (response.code() == 200 || response.code() == 201) {
                     var editor : SharedPreferences.Editor? = null

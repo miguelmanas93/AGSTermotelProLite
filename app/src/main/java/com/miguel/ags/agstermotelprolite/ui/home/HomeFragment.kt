@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ListAdapter
 import com.miguel.ags.agstermotelprolite.R
 
 
@@ -38,16 +39,15 @@ class HomeFragment : Fragment() {
         //Spiner con los datos
         val spinner = root.findViewById<View>(R.id.spinnerCamaras) as Spinner
         spinnerViewModel = ViewModelProviders.of(this).get(SpinnerViewModel::class.java)
-        var datos = spinnerViewModel.cargarDatos()
+        val datos = spinnerViewModel.cargarDatos()
 
-        val adapter = ArrayAdapter(
-            this.requireActivity(),
-            android.R.layout.simple_spinner_item,
-            datos
-        )
 
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
-        spinner.adapter = adapter
+
+
+
+
+      //  val adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+        //spinner.adapter = adapter
 
         //Recicler View para mostrar datos de la tabla
 

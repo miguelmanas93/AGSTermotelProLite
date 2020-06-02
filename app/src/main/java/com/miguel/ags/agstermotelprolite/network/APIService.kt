@@ -14,11 +14,11 @@ interface APIService {
         @Body info: Usuarios
     ): retrofit2.Call<Usuarios>
 
-    @GET("usuarios")
+    @GET("/usuarios")
      fun getUsuarios(): Call<List<Usuarios>>
 
     @GET("usuarios")
-    fun getCamaras(@Query("id") id : String, @Query("nombre") nombre : String, @Query("pass") pass : String): Call<List<Usuarios>>
+    fun getCamaras(@Query("id") id : String, @Query("name") nombre : String, @Query("pass") pass : String): Call<List<Usuarios>>
 
 
 }

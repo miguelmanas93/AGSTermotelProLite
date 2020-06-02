@@ -23,10 +23,10 @@ class LoginDataSource {
 
 
         val purApp = RetrofitClient.getRetrofitInstance().create(APIService::class.java)
-        val signInInfo = Usuarios<Any>(0, username, password, camaras = null)
-        purApp.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios<Any?>> {
+        val signInInfo = Usuarios(0, username, password, camaras = null)
+        purApp.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios> {
 
-            override fun onFailure(call: Call<Usuarios<Any?>>, t: Throwable) {
+            override fun onFailure(call: Call<Usuarios>, t: Throwable) {
                 if (t.cause is ConnectException) {
                     mensajeEstado.value = Avisos("Check your connection!")
                 } else {
@@ -35,8 +35,8 @@ class LoginDataSource {
             }
 
             override fun onResponse(
-                call: Call<Usuarios<Any?>>,
-                response: Response<Usuarios<Any?>>
+                call: Call<Usuarios>,
+                response: Response<Usuarios>
             ) {
                 if (response.code() == 200) {
                     var editor: SharedPreferences.Editor? = null

@@ -15,6 +15,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.miguel.ags.agstermotelprolite.R
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidFileProperties
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,6 +51,21 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
    //     val spinner : Spinner = findViewById(R.id.spinnerCamaras)
+
+        startKoin {
+            // use AndroidLogger as Koin Logger - default Level.INFO
+            androidLogger()
+
+            // use the Android context given there
+            androidContext(this@MainActivity)
+
+            // load properties from assets/koin.properties file
+            androidFileProperties()
+
+            // module list
+            //modules(offlineWeatherApp)
+        }
+
 
     }
 
