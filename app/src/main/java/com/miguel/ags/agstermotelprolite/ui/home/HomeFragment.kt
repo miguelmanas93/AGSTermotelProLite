@@ -39,8 +39,7 @@ class HomeFragment : Fragment() {
         //Spiner con los datos
         val spinner = root.findViewById<View>(R.id.spinnerCamaras) as Spinner
         spinnerViewModel = ViewModelProviders.of(this).get(SpinnerViewModel::class.java)
-        val datos = spinnerViewModel.cargarDatos()
-
+        spinnerViewModel.cargarDatos()
 
 
 
