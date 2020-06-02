@@ -9,16 +9,14 @@
 
     <TextView
         android:id="@+id/text_home"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerCamaras"
@@ -29,91 +27,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_home" />
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="534dp"
+    <!-- Table View-->
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="589dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCamaras"
-        >
+        app:layout_constraintVertical_bias="0.567">
 
-        <TableRow
-            android:padding="5dp"
-            android:background="@color/colorPrimary"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-
-            <TextView
-                android:padding="2dp"
-
-                android:id="@+id/cab_NumSerie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:text="Numero de Serie"
-                android:textSize="18dp"/>
-
-            <TextView
-                android:id="@+id/cab_Alias"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alias"
-                android:textColor="#FFFFFF"
-                android:textSize="18dp"/>
-
-            <TextView
-                android:id="@+id/cab_Descripcion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Descripción"
-                android:textColor="#FFFFFF"
-                android:textSize="18dp"/>
-
-            <TextView
-                android:id="@+id/cab_Temperatura"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Temperatura"
-                android:textColor="#FFFFFF"
-                android:textSize="18dp"/>
-        </TableRow>
-
-        <TableRow
-            android:padding="5dp"
-            android:layout_marginTop="3dp"
-            android:background="#ececec"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-        <TextView
-            android:id="@+id/dat_NumSerie"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSondasList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            tools:listitem="@layout/table_list_item" />
 
-            android:text="Numero de Serie" />
-
-        <TextView
-            android:id="@+id/dat_Alias"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alias" />
-
-        <TextView
-            android:id="@+id/dat_Descripcion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Descripción" />
-
-        <TextView
-            android:id="@+id/dat_Temperatura"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Temperatura" />
-        </TableRow>
-
-    </TableLayout>
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,9 @@
 package com.miguel.ags.agstermotelprolite.data
 
 import android.content.SharedPreferences
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import com.miguel.ags.agstermotelprolite.data.model.CamarasJsonAdapter
 import com.miguel.ags.agstermotelprolite.data.model.LoggedInUser
 import com.miguel.ags.agstermotelprolite.data.model.Usuarios
 import com.miguel.ags.agstermotelprolite.network.APIService
@@ -20,7 +22,6 @@ class LoginDataSource {
     private val mensajeEstado = MutableLiveData<Avisos<String>>()
 
     fun login(username: String, password: String): Result<LoggedInUser> {
-
 
         val purApp = RetrofitClient.getRetrofitInstance().create(APIService::class.java)
         val signInInfo = Usuarios(0, username, password, camaras = null)
@@ -57,6 +58,7 @@ class LoginDataSource {
 
         val userName = LoggedInUser("$username")
         return Result.Success(userName)
+
     }
 
 

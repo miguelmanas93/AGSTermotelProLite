@@ -9,8 +9,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 
 class RetrofitClient {
-    companion object {
 
+    companion object {
         val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
             this.level = HttpLoggingInterceptor.Level.BODY
         }
@@ -19,9 +19,7 @@ class RetrofitClient {
             this.addInterceptor(interceptor)
         }.build()
 
-        /**
-         * Companion object to create the Mercatus
-         */
+
         fun getRetrofitInstance(): Retrofit {
             val moshi = Moshi.Builder().build()
                 return Retrofit.Builder()
