@@ -17,7 +17,6 @@ import com.miguel.ags.agstermotelprolite.data.DatosCamaras
 import com.miguel.ags.agstermotelprolite.data.model.Sondas
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var homeViewModel: HomeViewModel
@@ -29,7 +28,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var reciclerview : RecyclerView
 
     val ID_SPINNER = 2
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
