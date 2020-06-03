@@ -69,7 +69,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         })
         if (spinner != null) {
             val arrayAdapter =
-                context?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, nombres) }
+                context?.let { ArrayAdapter(it, android.R.layout.simple_expandable_list_item_1, nombres) }
             spinner.adapter = arrayAdapter
         }
     }
