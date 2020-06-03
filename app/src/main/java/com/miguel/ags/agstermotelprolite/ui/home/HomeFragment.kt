@@ -59,34 +59,22 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             spinner.adapter = arrayAdapter
         }
 
-
         cargarSondas(root)
 
         return root
     }
 
     fun cargarSondas(root: View) {
-
-        //ReciclerView
         val reciclerview = root.findViewById(R.id.recyclerViewSondasList) as RecyclerView
         reciclerview.layoutManager = LinearLayoutManager(activity)
 
         val sondasListTest = ArrayList<Sondas>().apply {
             userViewModel.data.observe(viewLifecycleOwner, Observer {
                 for (sondas in it[0].camaras!![0].sondas!!)
-                    add(
-                        Sondas(
-                            sondas.numSerie,
-                            sondas.alias,
-                            sondas.descripcion,
-                            sondas.temperatura
-                        )
-                    )
-
+                    add(Sondas(sondas.numSerie, sondas.alias, sondas.descripcion,sondas.temperatura))
                 reciclerview.adapter?.notifyDataSetChanged()
             })
         }
-
         reciclerview.adapter = TableViewAdapter(sondasListTest)
     }
 
@@ -97,10 +85,4 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         TODO("Not yet implemented")
     }
-
 }
-
-
-
-
-
