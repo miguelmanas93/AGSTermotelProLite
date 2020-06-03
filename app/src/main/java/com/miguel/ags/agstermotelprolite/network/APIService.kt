@@ -19,8 +19,11 @@ interface APIService {
     @GET("/usuarios")
      fun getUsuarios(): Call<List<Usuarios>>
 
-    @GET("/usuarios")
+    @GET("/usuarios?id=0&name=Miguel&pass=qwerty")
     fun getCamaras(@Query("id") id: Int, @Query("name") nombre: String, @Query("pass") pass: String): Call<List<Camaras>>
+
+    @GET("/usuarios?id=0&name=Miguel&pass=qwerty")
+    fun getCamaras(): Call<List<Camaras>>
 
     @GET("/usuarios")
     fun getSondas(@Query("id") id : Int, @Query("nombre") nombre : String): Call<ArrayList<Sondas>>

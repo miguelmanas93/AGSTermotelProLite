@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.miguel.ags.agstermotelprolite.R
 import com.miguel.ags.agstermotelprolite.data.model.Sondas
+import com.miguel.ags.agstermotelprolite.data.model.Usuarios
 import kotlinx.android.synthetic.main.table_list_item.view.*
 
 class TableViewAdapter(private val sondasList: List<Sondas>) : RecyclerView.Adapter<TableViewAdapter.RowViewHolder>() {
@@ -36,7 +37,7 @@ class TableViewAdapter(private val sondasList: List<Sondas>) : RecyclerView.Adap
 
                 tvNumSerie.text = "Num Serie"
                 tvAlias.text = "Alias"
-                tvDescripcion.text = "Año"
+                tvDescripcion.text = "Descripción"
                 tvTemperatura.text = "Temperatura"
             }
         } else {
@@ -51,7 +52,7 @@ class TableViewAdapter(private val sondasList: List<Sondas>) : RecyclerView.Adap
                 tvNumSerie.text = modal.numSerie
                 tvAlias.text = modal.alias
                 tvDescripcion.text = modal.descripcion
-                tvTemperatura.text = modal.temperatura.toString()
+                tvTemperatura.text = modal.temperatura.toString() + "ºC"
             }
         }
     }

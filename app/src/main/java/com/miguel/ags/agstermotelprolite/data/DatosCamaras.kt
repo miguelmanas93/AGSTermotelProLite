@@ -26,8 +26,8 @@ class DatosCamaras : ViewModel(){
     val dataCamara : LiveData<List<Camaras>>
         get() = _dataCamara
 
-    private val _dataSondas = MutableLiveData<ArrayList<Sondas>>()
-    val dataSondas : LiveData<ArrayList<Sondas>>
+    private val _dataSondas = MutableLiveData<ArrayList<Usuarios>>()
+    val dataSondas : LiveData<ArrayList<Usuarios>>
         get() = _dataSondas
 
 
@@ -72,7 +72,7 @@ class DatosCamaras : ViewModel(){
         //Instancia de retrofit
         val service = RetrofitClient.getRetrofitInstance().create(APIService::class.java)
         //LLamada al metodo que vamos a user
-        val callCamaras: Call<List<Camaras>> = service.getCamaras(id,name,pass)
+        val callCamaras: Call<List<Camaras>> = service.getCamaras()
 
         callCamaras.enqueue(object : Callback<List<Camaras>> {
             override fun onResponse(call: Call<List<Camaras>>, response: Response<List<Camaras>>) {
