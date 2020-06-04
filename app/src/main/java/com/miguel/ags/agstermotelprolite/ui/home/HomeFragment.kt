@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miguel.ags.agstermotelprolite.R
-import com.miguel.ags.agstermotelprolite.adapters.TableViewAdapter
 import com.miguel.ags.agstermotelprolite.data.model.Sondas
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -61,7 +60,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     fun cargarCamarasSpinner() {
         val nombres: ArrayList<String> = arrayListOf("¿Que camara quieres ver?")
         userViewModel.data.observe(viewLifecycleOwner, Observer {
-            for (camaras in it[0].camaras!!)
+            for (camaras in it[0]?.camaras!!)
                 nombres.add(camaras.nombre)
         })
         if (spinner != null) {
@@ -79,7 +78,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }else{
        val sondasListTest = ArrayList<Sondas>().apply {
             userViewModel.data.observe(viewLifecycleOwner, Observer {
-                for (sondas in it[0].camaras!![idCamara].sondas!!)
+                for (sondas in it[0]?.camaras!![idCamara].sondas!!)
                     add(
                         Sondas(
                             sondas.numSerie,
@@ -91,7 +90,10 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 reciclerview.adapter?.notifyDataSetChanged()
             })
         }
-        reciclerview.adapter = TableViewAdapter(sondasListTest)
+        reciclerview.adapter =
+            TableViewAdapter(
+                sondasListTest
+            )
         }
     }
 

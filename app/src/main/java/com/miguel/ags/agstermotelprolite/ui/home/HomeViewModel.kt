@@ -91,6 +91,4 @@ class HomeViewModel : ViewModel(), KoinComponent {
             }
         })
     }
-
-
 }

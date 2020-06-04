@@ -1,19 +1,17 @@
 package com.miguel.ags.agstermotelprolite.injection
 
-import com.miguel.ags.agstermotelprolite.ui.home.HomeViewModel
+import com.miguel.ags.agstermotelprolite.data.LoginDataSource
+import com.miguel.ags.agstermotelprolite.network.APIService
 import com.miguel.ags.agstermotelprolite.network.RetrofitClient
-import com.miguel.ags.agstermotelprolite.ui.gallery.GalleryViewModel
-import com.miguel.ags.agstermotelprolite.ui.login.LoginViewModel
+import com.miguel.ags.agstermotelprolite.repository.LoginRepository
 import org.koin.dsl.module
 
-val DependencyModule = module{
+val DependencyModule = module {
+    single<APIService> { RetrofitClient().getInstance() }
 
-    single { RetrofitClient().getInstance() }
-    single { LoginViewModel(get()) }
-    //single { GalleryViewModel()}
-    //single { HomeViewModel() }
 
-}
+    }
+
 
 
 

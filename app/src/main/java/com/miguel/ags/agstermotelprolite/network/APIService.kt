@@ -8,8 +8,9 @@ import retrofit2.http.*
 
 
 interface APIService {
-    // Peticion Iniciar Sesion
+
     @Headers("Content-Type:application/json")
+    // Peticion Iniciar Sesion
     @POST("/usuarios")
     fun iniciarSesion(
         @Body info: Usuarios

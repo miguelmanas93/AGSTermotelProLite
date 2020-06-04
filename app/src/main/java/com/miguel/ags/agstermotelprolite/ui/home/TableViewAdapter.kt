@@ -1,4 +1,4 @@
-package com.miguel.ags.agstermotelprolite.adapters
+package com.miguel.ags.agstermotelprolite.ui.home
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.miguel.ags.agstermotelprolite.R
 import com.miguel.ags.agstermotelprolite.data.model.Sondas
-import com.miguel.ags.agstermotelprolite.data.model.Usuarios
 import kotlinx.android.synthetic.main.table_list_item.view.*
 
 class TableViewAdapter(private val sondasList: List<Sondas>) : RecyclerView.Adapter<TableViewAdapter.RowViewHolder>() {

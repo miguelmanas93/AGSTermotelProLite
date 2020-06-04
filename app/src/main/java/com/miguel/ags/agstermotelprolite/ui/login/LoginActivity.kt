@@ -61,7 +61,8 @@ class LoginActivity : AppCompatActivity() {
             }
             setResult(Activity.RESULT_OK)
 
-            //Complete and destroy login activity once successful
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
             finish()
         })
 
@@ -102,8 +103,7 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+
         
         Toast.makeText(
             applicationContext,
