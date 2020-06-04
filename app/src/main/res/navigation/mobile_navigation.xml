@@ -40,4 +40,9 @@
         android:name="com.miguel.ags.agstermotelprolite.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <activity
+        android:id="@+id/nav_logout"
+        android:name="com.miguel.ags.agstermotelprolite.ui.login.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 </navigation>

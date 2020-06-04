@@ -15,8 +15,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import com.miguel.ags.agstermotelprolite.MainActivity
+import com.miguel.ags.agstermotelprolite.ui.MainActivity
 import com.miguel.ags.agstermotelprolite.R
 
 class LoginActivity : AppCompatActivity() {

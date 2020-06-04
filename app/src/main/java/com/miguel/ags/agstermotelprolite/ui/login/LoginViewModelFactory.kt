@@ -3,7 +3,7 @@ package com.miguel.ags.agstermotelprolite.ui.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.miguel.ags.agstermotelprolite.data.LoginDataSource
-import com.miguel.ags.agstermotelprolite.data.model.LoginRepository
+import com.miguel.ags.agstermotelprolite.repository.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.
@@ -16,7 +16,7 @@ class LoginViewModelFactory : ViewModelProvider.Factory {
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             return LoginViewModel(
                     loginRepository = LoginRepository(
-                            dataSource = LoginDataSource()
+                        dataSource = LoginDataSource()
                     )
             ) as T
         }

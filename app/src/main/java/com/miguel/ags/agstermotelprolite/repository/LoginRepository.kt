@@ -1,7 +1,8 @@
-package com.miguel.ags.agstermotelprolite.data.model
+package com.miguel.ags.agstermotelprolite.repository
 
 import com.miguel.ags.agstermotelprolite.data.LoginDataSource
 import com.miguel.ags.agstermotelprolite.data.Result
+import com.miguel.ags.agstermotelprolite.data.model.LoggedInUser
 
 /**
  * Class that requests authentication and user information from the remote data source and

@@ -1,4 +1,4 @@
-package com.miguel.ags.agstermotelprolite
+package com.miguel.ags.agstermotelprolite.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -13,14 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.miguel.ags.agstermotelprolite.network.RetrofitClient
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidFileProperties
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.KoinContextHandler.get
-import org.koin.core.context.startKoin
-import org.koin.dsl.module
+import com.miguel.ags.agstermotelprolite.R
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,11 +26,6 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -48,7 +36,8 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.nav_home,
                 R.id.nav_gallery,
-                R.id.nav_slideshow
+                R.id.nav_slideshow,
+                R.id.nav_logout
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

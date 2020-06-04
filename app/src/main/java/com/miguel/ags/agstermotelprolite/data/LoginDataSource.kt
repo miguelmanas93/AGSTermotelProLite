@@ -9,6 +9,8 @@ import com.miguel.ags.agstermotelprolite.data.model.Usuarios
 import com.miguel.ags.agstermotelprolite.network.APIService
 import com.miguel.ags.agstermotelprolite.network.RetrofitClient
 import com.miguel.ags.agstermotelprolite.utils.Avisos
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,15 +19,15 @@ import java.net.ConnectException
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
-class LoginDataSource {
+class LoginDataSource : KoinComponent {
 
     private val mensajeEstado = MutableLiveData<Avisos<String>>()
+    private val apiService: APIService by inject()
 
     fun login(username: String, password: String): Result<LoggedInUser> {
 
-        val purApp = RetrofitClient.getRetrofitInstance().create(APIService::class.java)
         val signInInfo = Usuarios(0, username, password, camaras = null)
-        purApp.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios> {
+        apiService.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios> {
 
             override fun onFailure(call: Call<Usuarios>, t: Throwable) {
                 if (t.cause is ConnectException) {
@@ -55,18 +57,13 @@ class LoginDataSource {
                 }
             }
         })
-
         val userName = LoggedInUser("$username")
         return Result.Success(userName)
-
     }
-
-
 
     fun logout() {
         // TODO: revoke authentication
     }
-
 }
 
 

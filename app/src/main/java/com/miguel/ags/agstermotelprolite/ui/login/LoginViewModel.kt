@@ -7,21 +7,24 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.miguel.ags.agstermotelprolite.R
-import com.miguel.ags.agstermotelprolite.data.model.LoginRepository
+import com.miguel.ags.agstermotelprolite.repository.LoginRepository
 import com.miguel.ags.agstermotelprolite.data.model.Usuarios
 import com.miguel.ags.agstermotelprolite.network.APIService
-import com.miguel.ags.agstermotelprolite.network.RetrofitClient
 import com.miguel.ags.agstermotelprolite.utils.Avisos
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.net.ConnectException
 import com.miguel.ags.agstermotelprolite.data.Result
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 
-class LoginViewModel (private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel (private val loginRepository: LoginRepository) : ViewModel(), KoinComponent {
+
     private val _loginForm = MutableLiveData<LoginFormState>()
     private val mensajeEstado = MutableLiveData<Avisos<String>>()
+    private val apiService: APIService by inject()
 
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
@@ -29,9 +32,9 @@ class LoginViewModel (private val loginRepository: LoginRepository) : ViewModel(
     val loginResult: LiveData<LoginResult> = _loginResult
 
     fun login(username: String, password: String) {
-        val purApp = RetrofitClient.getRetrofitInstance().create(APIService::class.java)
+
         val signInInfo = Usuarios(0, username, password, emptyList())
-        purApp.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios> {
+        apiService.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios> {
             override fun onFailure(call: Call<Usuarios>, t: Throwable) {
                 if (t.cause is ConnectException) {
                     mensajeEstado.value = Avisos("Check your connection!")
@@ -58,8 +61,6 @@ class LoginViewModel (private val loginRepository: LoginRepository) : ViewModel(
                     } else {
                         _loginResult.value = LoginResult(error = R.string.login_failed)
                     }
-
-
                 } else if (response.code() == 500) {
                     mensajeEstado.value = Avisos("The given email or password is wrong!")
                 } else {
@@ -67,8 +68,6 @@ class LoginViewModel (private val loginRepository: LoginRepository) : ViewModel(
                 }
             }
         })
-
-
     }
 
     fun loginDataChanged(username: String, password: String) {
