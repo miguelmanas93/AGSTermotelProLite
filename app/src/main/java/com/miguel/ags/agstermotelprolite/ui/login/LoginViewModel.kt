@@ -14,11 +14,10 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel(), KoinComponent {
+class LoginViewModel : ViewModel(), KoinComponent {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
-
-
+    private val loginRepository : LoginRepository by inject()
 
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
@@ -26,7 +25,6 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     val loginResult: LiveData<LoginResult> = _loginResult
 
     fun login(username: String, password: String) {
-
 
         val result = loginRepository.login(username, password)
 
