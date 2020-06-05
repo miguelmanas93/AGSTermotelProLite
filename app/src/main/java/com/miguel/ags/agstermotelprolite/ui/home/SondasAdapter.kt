@@ -8,7 +8,7 @@ import com.miguel.ags.agstermotelprolite.R
 import com.miguel.ags.agstermotelprolite.data.model.Sondas
 import kotlinx.android.synthetic.main.table_list_item.view.*
 
-class TableViewAdapter(private val sondasList: List<Sondas>) : RecyclerView.Adapter<TableViewAdapter.RowViewHolder>() {
+class SondasAdapter(private val sondasList: List<Sondas>) : RecyclerView.Adapter<SondasAdapter.RowViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RowViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.table_list_item, parent, false)

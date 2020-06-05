@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miguel.ags.agstermotelprolite.R
-import com.miguel.ags.agstermotelprolite.data.model.Sondas
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -76,32 +75,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
 
-    private fun cargarSondas(reciclerview: RecyclerView, idCamara: Int) {
-        if (idCamara < 0) {
-            Toast.makeText(context, "Seleccione una de las camaras por favor", Toast.LENGTH_LONG)
-                .show()
 
-        } else {
-            val sondasListTest = ArrayList<Sondas>().apply {
-                userViewModel.data.observe(viewLifecycleOwner, Observer {
-                    for (sondas in it[0]?.camaras!![idCamara].sondas!!)
-                        add(
-                            Sondas(
-                                sondas.numSerie,
-                                sondas.alias,
-                                sondas.descripcion,
-                                sondas.temperatura
-                            )
-                        )
-                    reciclerview.adapter?.notifyDataSetChanged()
-                })
-            }
-            reciclerview.adapter =
-                TableViewAdapter(
-                    sondasListTest
-                )
-        }
-    }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         Toast.makeText(context, "Nada Seleccinado", Toast.LENGTH_LONG).show()
@@ -110,11 +84,17 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when (view?.id) {
             1 -> {
-                cargarSondas(reciclerview, position - 1)
+                context?.let {
+                    userViewModel.cargarSondas(reciclerview, position - 1,
+                        it, viewLifecycleOwner)
+                }
             }
             else -> {
                 //   Toast.makeText(context, "Spinner 3 Position:${position}", Toast.LENGTH_LONG).show()
-                cargarSondas(reciclerview, position - 1)
+                context?.let {
+                    userViewModel.cargarSondas(reciclerview, position - 1,
+                        it, viewLifecycleOwner)
+                }
             }
         }
     }
