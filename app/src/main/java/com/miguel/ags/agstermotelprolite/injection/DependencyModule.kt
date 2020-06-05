@@ -8,7 +8,9 @@ import org.koin.dsl.module
 
 val DependencyModule = module {
     single<APIService> { RetrofitClient().getInstance() }
-    single {  }
+    single { LoginRepository()
+    }
+    
 
 
     }

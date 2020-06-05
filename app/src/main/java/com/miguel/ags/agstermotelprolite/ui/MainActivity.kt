@@ -2,6 +2,7 @@ package com.miguel.ags.agstermotelprolite.ui
 
 import android.os.Bundle
 import android.view.Menu
+import android.widget.TextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -14,10 +15,16 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.miguel.ags.agstermotelprolite.R
+import com.miguel.ags.agstermotelprolite.data.model.LoggedInUser
+import com.miguel.ags.agstermotelprolite.data.model.Usuarios
+import com.miguel.ags.agstermotelprolite.ui.login.LoggedInUserView
+import kotlinx.android.synthetic.main.activity_login.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+    private lateinit var datosUsuarios: Usuarios
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

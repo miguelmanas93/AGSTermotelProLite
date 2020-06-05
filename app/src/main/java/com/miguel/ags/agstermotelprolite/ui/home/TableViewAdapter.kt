@@ -40,7 +40,7 @@ class TableViewAdapter(private val sondasList: List<Sondas>) : RecyclerView.Adap
                 tvTemperatura.text = "Temperatura"
             }
         } else {
-            val modal = sondasList[rowPos - 1]
+            val sondaValor = sondasList[rowPos - 1]
 
             holder.itemView.apply {
                 setContentBg(tvNumSerie)
@@ -48,10 +48,10 @@ class TableViewAdapter(private val sondasList: List<Sondas>) : RecyclerView.Adap
                 setContentBg(tvDescripcion)
                 setContentBg(tvTemperatura)
 
-                tvNumSerie.text = modal.numSerie
-                tvAlias.text = modal.alias
-                tvDescripcion.text = modal.descripcion
-                tvTemperatura.text = modal.temperatura.toString() + "ºC"
+                tvNumSerie.text = sondaValor.numSerie
+                tvAlias.text = sondaValor.alias
+                tvDescripcion.text = sondaValor.descripcion
+                tvTemperatura.text = sondaValor.temperatura.toString() + "ºC"
             }
         }
     }

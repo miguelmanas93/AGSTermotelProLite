@@ -30,18 +30,10 @@ class LoginRepository : KoinComponent {
     var user: LoggedInUser? = null
         private set
 
-    val isLoggedIn: Boolean
-        get() = user != null
-
     init {
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
         user = null
-    }
-
-    fun logout() {
-        user = null
-
     }
 
     fun login(username: String, password: String): Result<LoggedInUser> {
@@ -66,8 +58,6 @@ class LoginRepository : KoinComponent {
                         editor?.commit()
                         mensajeEstado.value = Avisos( "Login success!")
 
-
-
                     } else if (response.code() == 500) {
                         mensajeEstado.value = Avisos("The given email or password is wrong!")
                     } else {
@@ -80,11 +70,5 @@ class LoginRepository : KoinComponent {
         } catch (e: Throwable) {
             return Result.Error(IOException("Error logging in", e))
         }
-    }
-
-    private fun setLoggedInUser(loggedInUser: LoggedInUser) {
-        this.user = loggedInUser
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
     }
 }

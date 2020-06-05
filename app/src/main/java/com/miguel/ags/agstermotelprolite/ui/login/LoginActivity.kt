@@ -15,8 +15,8 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.miguel.ags.agstermotelprolite.ui.MainActivity
 import com.miguel.ags.agstermotelprolite.R
+import com.miguel.ags.agstermotelprolite.ui.MainActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -41,24 +41,23 @@ class LoginActivity : AppCompatActivity() {
             // disable login button unless both username / password is valid
             login.isEnabled = loginState.isDataValid
 
-            if (loginState.usernameError != null) {
-                username.error = getString(loginState.usernameError)
+            username.error = loginState.usernameError?.let { it1 ->
+                getString(it1)
             }
-            if (loginState.passwordError != null) {
-                password.error = getString(loginState.passwordError)
+            password.error = loginState.passwordError?.let { it1 ->
+                getString(it1)
             }
+
         })
 
         loginViewModel.loginResult.observe(this@LoginActivity, Observer {
             val loginResult = it ?: return@Observer
 
             loading.visibility = View.GONE
-            if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
-            }
-            if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
-            }
+
+            loginResult.error?.let { it1 -> showLoginFailed(it1) }
+            loginResult.success?.let { it1 -> updateUiWithUser(it1) }
+
             setResult(Activity.RESULT_OK)
 
             val intent = Intent(this, MainActivity::class.java)
@@ -104,7 +103,6 @@ class LoginActivity : AppCompatActivity() {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
 
-        
         Toast.makeText(
             applicationContext,
             "$welcome $displayName",

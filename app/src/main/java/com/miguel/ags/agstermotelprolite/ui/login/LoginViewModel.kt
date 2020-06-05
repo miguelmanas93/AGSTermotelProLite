@@ -15,7 +15,6 @@ import org.koin.core.inject
 
 
 class LoginViewModel : ViewModel(), KoinComponent {
-
     private val _loginForm = MutableLiveData<LoginFormState>()
     private val loginRepository : LoginRepository by inject()
 

@@ -22,7 +22,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private val userViewModel by viewModel<HomeViewModel>()
 
     private lateinit var spinner: Spinner
-    private lateinit var reciclerview : RecyclerView
+    private lateinit var reciclerview: RecyclerView
 
     val ID_SPINNER = 2
 
@@ -63,37 +63,43 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             for (camaras in it[0]?.camaras!!)
                 nombres.add(camaras.nombre)
         })
-        if (spinner != null) {
-            val arrayAdapter =
-                context?.let { ArrayAdapter(it, android.R.layout.simple_expandable_list_item_1, nombres) }
+        spinner.let {
+            val arrayAdapter = context?.let {
+                    ArrayAdapter(
+                        it,
+                        android.R.layout.simple_expandable_list_item_1,
+                        nombres
+                    )
+                }
             spinner.adapter = arrayAdapter
         }
     }
 
 
     private fun cargarSondas(reciclerview: RecyclerView, idCamara: Int) {
-        if(idCamara < 0){
-            Toast.makeText(context, "Seleccione una de las camaras por favor", Toast.LENGTH_LONG).show()
+        if (idCamara < 0) {
+            Toast.makeText(context, "Seleccione una de las camaras por favor", Toast.LENGTH_LONG)
+                .show()
 
-        }else{
-       val sondasListTest = ArrayList<Sondas>().apply {
-            userViewModel.data.observe(viewLifecycleOwner, Observer {
-                for (sondas in it[0]?.camaras!![idCamara].sondas!!)
-                    add(
-                        Sondas(
-                            sondas.numSerie,
-                            sondas.alias,
-                            sondas.descripcion,
-                            sondas.temperatura
+        } else {
+            val sondasListTest = ArrayList<Sondas>().apply {
+                userViewModel.data.observe(viewLifecycleOwner, Observer {
+                    for (sondas in it[0]?.camaras!![idCamara].sondas!!)
+                        add(
+                            Sondas(
+                                sondas.numSerie,
+                                sondas.alias,
+                                sondas.descripcion,
+                                sondas.temperatura
+                            )
                         )
-                    )
-                reciclerview.adapter?.notifyDataSetChanged()
-            })
-        }
-        reciclerview.adapter =
-            TableViewAdapter(
-                sondasListTest
-            )
+                    reciclerview.adapter?.notifyDataSetChanged()
+                })
+            }
+            reciclerview.adapter =
+                TableViewAdapter(
+                    sondasListTest
+                )
         }
     }
 
@@ -103,12 +109,12 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when (view?.id) {
-            1 ->{
-                cargarSondas(reciclerview, position-1)
-                }
+            1 -> {
+                cargarSondas(reciclerview, position - 1)
+            }
             else -> {
-             //   Toast.makeText(context, "Spinner 3 Position:${position}", Toast.LENGTH_LONG).show()
-                cargarSondas(reciclerview, position-1)
+                //   Toast.makeText(context, "Spinner 3 Position:${position}", Toast.LENGTH_LONG).show()
+                cargarSondas(reciclerview, position - 1)
             }
         }
     }
