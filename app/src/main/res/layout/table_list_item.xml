@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:background="@drawable/table_content_cell_bg"
-        android:text="Item NameLot of so somany names that appear to be there is no there is no way   "
+        android:text="Item NameLot of so somany names that appear to be there is no there is no way"
         android:textSize="18sp" />
 
     <TextView

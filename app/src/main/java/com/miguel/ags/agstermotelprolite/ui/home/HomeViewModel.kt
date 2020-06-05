@@ -41,7 +41,12 @@ class HomeViewModel : ViewModel(), KoinComponent {
     }
     val text: LiveData<String> = _text
 
-    fun cargarSondas(reciclerview: RecyclerView, idCamara: Int, context: Context, viewLifecycleOwner: LifecycleOwner) {
+    fun cargarSondas(
+        reciclerview: RecyclerView,
+        idCamara: Int,
+        context: Context,
+        viewLifecycleOwner: LifecycleOwner
+    ) {
         if (idCamara < 0) {
             Toast.makeText(context, "Seleccione una de las camaras por favor", Toast.LENGTH_LONG)
                 .show()

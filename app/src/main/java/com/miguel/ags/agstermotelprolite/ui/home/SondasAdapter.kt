@@ -15,25 +15,12 @@ class SondasAdapter(private val sondasList: List<Sondas>) : RecyclerView.Adapter
         return RowViewHolder(itemView)
     }
 
-    private fun setHeaderBg(view: View) {
-        view.setBackgroundResource(R.drawable.table_header_cell_bg)
-    }
-
-    private fun setContentBg(view: View) {
-        view.setBackgroundResource(R.drawable.table_content_cell_bg)
-    }
-
     override fun onBindViewHolder(holder: RowViewHolder, position: Int) {
         val rowPos = holder.adapterPosition
 
         if (rowPos == 0) {
             // Header Cells. Main Headings appear here
             holder.itemView.apply {
-                setHeaderBg(tvNumSerie)
-                setHeaderBg(tvAlias)
-                setHeaderBg(tvDescripcion)
-                setHeaderBg(tvTemperatura)
-
                 tvNumSerie.text = "Num Serie"
                 tvAlias.text = "Alias"
                 tvDescripcion.text = "Descripción"
@@ -43,11 +30,6 @@ class SondasAdapter(private val sondasList: List<Sondas>) : RecyclerView.Adapter
             val sondaValor = sondasList[rowPos - 1]
 
             holder.itemView.apply {
-                setContentBg(tvNumSerie)
-                setContentBg(tvAlias)
-                setContentBg(tvDescripcion)
-                setContentBg(tvTemperatura)
-
                 tvNumSerie.text = sondaValor.numSerie
                 tvAlias.text = sondaValor.alias
                 tvDescripcion.text = sondaValor.descripcion
