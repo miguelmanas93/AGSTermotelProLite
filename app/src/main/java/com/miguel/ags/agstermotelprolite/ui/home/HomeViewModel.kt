@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.miguel.ags.agstermotelprolite.data.model.Camaras
 import com.miguel.ags.agstermotelprolite.data.model.Sondas
 import com.miguel.ags.agstermotelprolite.data.model.Usuarios
-import com.miguel.ags.agstermotelprolite.network.APIService
+import com.miguel.ags.agstermotelprolite.repository.ChamberRepository
+import com.miguel.ags.agstermotelprolite.repository.RestUserRepository
 import com.miguel.ags.agstermotelprolite.utils.Avisos
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -17,7 +18,8 @@ import retrofit2.Response
 
 class HomeViewModel : ViewModel(), KoinComponent {
 
-    private val apiService: APIService by inject()
+    private val userRepository: RestUserRepository by inject()
+    private val chamberRepository: ChamberRepository by inject()
 
     private var mensajeEstado = MutableLiveData<Avisos<String>>()
 
@@ -39,17 +41,14 @@ class HomeViewModel : ViewModel(), KoinComponent {
     val text: LiveData<String> = _text
 
     fun cargarUsuarios() {
-        //LLamada al metodo que vamos a user
-        val callUsuarios: Call<List<Usuarios>> = apiService.getUsuarios()
-
-        callUsuarios.enqueue(object : Callback<List<Usuarios>> {
+        userRepository.cargarDatosUsuarios().enqueue(object : Callback<List<Usuarios>> {
             override fun onResponse(
                 call: Call<List<Usuarios>>,
                 response: Response<List<Usuarios>>
             ) {
-                //response.body()
                 _dataUser.postValue(response.body())
             }
+
             override fun onFailure(call: Call<List<Usuarios>>, throwable: Throwable) {
                 mensajeEstado.value = Avisos("Error al cargar la lista de camaras")
             }
@@ -57,10 +56,7 @@ class HomeViewModel : ViewModel(), KoinComponent {
     }
 
     fun cargarDatosSondas(idSonda: Int, nombre: String) {
-        //LLamada al metodo que vamos a user
-        val callSondas: Call<ArrayList<Sondas>> = apiService.getSondas(idSonda, nombre)
-
-        callSondas.enqueue(object : Callback<ArrayList<Sondas>> {
+        chamberRepository.getSondas(idSonda, nombre).enqueue(object : Callback<ArrayList<Sondas>> {
             override fun onResponse(
                 call: Call<ArrayList<Sondas>>,
                 response: Response<ArrayList<Sondas>>
@@ -77,10 +73,7 @@ class HomeViewModel : ViewModel(), KoinComponent {
     }
 
     fun cargarDatosCamaras(id: Int, name: String, pass: String) {
-        //LLamada al metodo que vamos a user
-        val callCamaras: Call<List<Camaras>> = apiService.getCamaras()
-
-        callCamaras.enqueue(object : Callback<List<Camaras>> {
+        chamberRepository.getCamaras().enqueue(object : Callback<List<Camaras>> {
             override fun onResponse(call: Call<List<Camaras>>, response: Response<List<Camaras>>) {
                 //response.body()
                 _dataCamara.postValue(response.body())

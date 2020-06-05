@@ -24,7 +24,6 @@ class LoginViewModel : ViewModel(), KoinComponent {
     val loginResult: LiveData<LoginResult> = _loginResult
 
     fun login(username: String, password: String) {
-
         val result = loginRepository.login(username, password)
 
         if (result is Result.Success) {

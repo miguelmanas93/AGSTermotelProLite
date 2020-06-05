@@ -6,7 +6,6 @@ import com.miguel.ags.agstermotelprolite.data.Result
 import com.miguel.ags.agstermotelprolite.data.model.LoggedInUser
 import com.miguel.ags.agstermotelprolite.data.model.Usuarios
 import com.miguel.ags.agstermotelprolite.network.APIService
-import com.miguel.ags.agstermotelprolite.ui.login.LoginActivity
 import com.miguel.ags.agstermotelprolite.utils.Avisos
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -37,6 +36,7 @@ class LoginRepository : KoinComponent {
     }
 
     fun login(username: String, password: String): Result<LoggedInUser> {
+
         try {
             val signInInfo = Usuarios(0, username, password, emptyList())
             apiService.iniciarSesion(signInInfo).enqueue(object : Callback<Usuarios> {

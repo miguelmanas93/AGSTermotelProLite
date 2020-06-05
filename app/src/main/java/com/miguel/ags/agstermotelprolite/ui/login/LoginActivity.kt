@@ -60,9 +60,7 @@ class LoginActivity : AppCompatActivity() {
 
             setResult(Activity.RESULT_OK)
 
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+
         })
 
         username.afterTextChanged {
@@ -108,6 +106,10 @@ class LoginActivity : AppCompatActivity() {
             "$welcome $displayName",
             Toast.LENGTH_LONG
         ).show()
+
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {
