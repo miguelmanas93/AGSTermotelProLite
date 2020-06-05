@@ -21,16 +21,16 @@ class HomeViewModel : ViewModel(), KoinComponent {
 
     private var mensajeEstado = MutableLiveData<Avisos<String>>()
 
-    private val _data = MutableLiveData<List<Usuarios>>()
+    private val _dataUser = MutableLiveData<List<Usuarios>>()
     val data: LiveData<List<Usuarios>>
-        get() = _data
+        get() = _dataUser
 
     private val _dataCamara = MutableLiveData<List<Camaras>>()
     val dataCamara: LiveData<List<Camaras>>
         get() = _dataCamara
 
-    private val _dataSondas = MutableLiveData<ArrayList<Usuarios>>()
-    val dataSondas: LiveData<ArrayList<Usuarios>>
+    private val _dataSondas = MutableLiveData<ArrayList<Sondas>>()
+    val dataSondas: LiveData<ArrayList<Sondas>>
         get() = _dataSondas
 
     private val _text = MutableLiveData<String>().apply {
@@ -48,10 +48,10 @@ class HomeViewModel : ViewModel(), KoinComponent {
                 response: Response<List<Usuarios>>
             ) {
                 //response.body()
-                _data.postValue(response.body())
+                _dataUser.postValue(response.body())
             }
             override fun onFailure(call: Call<List<Usuarios>>, throwable: Throwable) {
-                mensajeEstado.value = Avisos("Error al cargar la lista de usuario")
+                mensajeEstado.value = Avisos("Error al cargar la lista de camaras")
             }
         })
     }
@@ -66,11 +66,11 @@ class HomeViewModel : ViewModel(), KoinComponent {
                 response: Response<ArrayList<Sondas>>
             ) {
                 //response.body()
-                //_dataSonda.postValue(response.body())
+                _dataSondas.postValue(response.body())
             }
 
             override fun onFailure(call: Call<ArrayList<Sondas>>, throwable: Throwable) {
-                mensajeEstado.value = Avisos("Error al cargar la lista de usuario")
+                mensajeEstado.value = Avisos("Error al cargar la lista de sondas")
 
             }
         })

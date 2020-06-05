@@ -16,6 +16,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    dataBinding{
+        enabled = true
+    }
 
     buildTypes {
         release {
@@ -78,4 +81,6 @@ dependencies {
 
     //RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    kapt 'com.android.databinding:compiler:2.3.1'
 }
